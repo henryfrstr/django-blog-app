@@ -1,12 +1,13 @@
 {% extends "myblog/base.html" %} {% block content %}
 
-<h1>Post</h1>
+<h1>Posts</h1>
 
 <ul>
 	{% for post in object_list %}
 	<li>
-		<a href="{% url 'post-detail' post.pk %}">{{post.title}}</a> -
-		{{post.author.first_name}} {{post.author.last_name}}<br />{{post.description|truncatewords:"10"}}
+		<a href="{% url 'post-detail' post.pk %}">{{post.title}}</a> - <a
+			href="{% url 'category' post.category %}">{{post.category}}</a> -
+		{{post.author.first_name}} {{post.author.last_name}}<br />{{post.description|truncatewords:"20"|safe}}
 	</li>
 
 	{% endfor %}

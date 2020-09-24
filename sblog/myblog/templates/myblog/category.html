@@ -1,0 +1,21 @@
+{% extends "myblog/base.html" %} {% block title %}{{catg}} Category{% endblock %} {% block content %}
+
+{% if category_posts %}
+
+<h1>{{catg}} Category</h1>
+
+<ul>
+    {% for post in category_posts %}
+    <li>
+        <a href="{% url 'post-detail' post.pk %}">{{post.title}}</a> - {{post.category}} -
+        {{post.author.first_name}} {{post.author.last_name}}<br />{{post.description|truncatewords:"20"|safe}}
+    </li>
+
+    {% endfor %}
+</ul>
+{% else %}
+
+<h2>Sorry {{catg}} category does not exist or does not have any posts...</h2>
+
+{% endif %}
+{% endblock %}

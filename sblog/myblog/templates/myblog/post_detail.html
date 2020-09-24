@@ -2,11 +2,12 @@
 {% block content %}
 
 <h1>{{post.title}}</h1>
-<small>By: {{post.author.first_name}} {{post.author.last_name}} - {{post.publication_date|date:"D d M Y" }}</small>
+<small>By: {{post.author.first_name}} {{post.author.last_name}} - {{post.publication_date|date:"D d M Y" }}</small> <br>
+<small>Category: {{post.category}}</small>
 <br />
 <br />
 <hr />
-{{post.description}}
+{{post.description|safe}}
 
 <br /><br />
 <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>

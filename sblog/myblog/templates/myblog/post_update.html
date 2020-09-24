@@ -1,6 +1,7 @@
 {% extends "myblog/base.html" %} {% block title %}Edit Blog{% endblock %} {% block content %}
 
-<h1>Add Blog Post</h1>
+{% if user.is_authenticated %}
+<h1>Update Post</h1>
 <br />
 <div class="form-group">
 	<form action="" method="post">
@@ -8,4 +9,9 @@
 		<button class="btn btn-secondary">Update</button>
 	</form>
 </div>
+
+{% else %}
+<h1>You're nıt allowed here. And you know it...</h1>
+
+{% endif %}
 {% endblock %}
