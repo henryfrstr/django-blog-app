@@ -6,6 +6,8 @@ choises = Category.objects.all().values_list('name', 'name')
 choise_list = []
 for item in choises:
     choise_list.append(item)
+choise_list = tuple(choise_list)
+
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -27,6 +29,7 @@ class PostForm(forms.ModelForm):
 
         # ordering = ["-id"]
 
+
 class PostUpdateForm(forms.ModelForm):
     class Meta:
         model = Post
@@ -40,5 +43,3 @@ class PostUpdateForm(forms.ModelForm):
             'title_tag': forms.TextInput(attrs={"class": "form-control", 'placeholder': 'Title Tag'}),
             'description': forms.Textarea(attrs={"class": "form-control", 'placeholder': 'Description'}),
         }
-
-        

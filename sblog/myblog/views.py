@@ -30,9 +30,9 @@ class HomeView(ListView):
     #     return context
 
 def CategoryView(request, catg):
-    category_posts = Post.objects.filter(category=catg)
+    category_posts = Post.objects.filter(category=catg.replace("-", " "))
     context = {
-        'catg': catg,
+        'catg': catg.title().replace("-", " "),
         'category_posts': category_posts
         }
     return render(request, "myblog/category.html", context)
