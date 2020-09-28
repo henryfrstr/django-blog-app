@@ -7,9 +7,16 @@
 <div class="form-group">
     <form action="" method="post">
         {% csrf_token %}
+        {{form.media}}
         {{form.as_p}}
         <button class="btn btn-secondary">Post</button>
 
     </form>
 </div>
+
+<script>
+    var name = "{{ user.id }}"
+    document.querySelector("#henry").value = name;
+</script>
+
 {% endblock %}

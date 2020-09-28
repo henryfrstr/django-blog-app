@@ -5,6 +5,8 @@ from .forms import PostForm, PostUpdateForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from django.contrib.auth.models import User
+
 
 # def home(request):
 #     context = {}
@@ -13,7 +15,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class HomeView(ListView):
     model = Post
     template_name = "myblog/home.html"
+    # catg = Category.objects.all()
     # ordering = ["-id"]
+
+    # def get_queryset(self):
+    #     return Post.objects.filter(author=self.request.user)
+
+
+    def get_context_data(self, *args, **kwargs):
+        catg_list = Category.objects.all()
+        context = super().get_context_data(*args, **kwargs)
+        context["catg_list"] = catg_list
+        return context
+
 
 # class CategoryView(ListView):
 #     model = Post
@@ -43,6 +57,12 @@ class PostDetailView(LoginRequiredMixin, DetailView):
     template_name = "myblog/post_detail.html"
     login_url = 'login'
     redirect_field_name = 'redirect_to'
+
+    def get_context_data(self, *args, **kwargs):
+        catg_list = Category.objects.all()
+        context = super().get_context_data(*args, **kwargs)
+        context["catg_list"] = catg_list
+        return context
 
     # def get_object(self):
     #     ik = self.kwargs.get("id")

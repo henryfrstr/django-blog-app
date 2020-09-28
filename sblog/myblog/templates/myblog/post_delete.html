@@ -1,5 +1,6 @@
 {% extends "myblog/base.html" %} {% block title %}Edit Blog{% endblock %} {% block content %}
 
+{% if user.id == post.author.id %}
 <h1>Delete Post</h1>
 <br />
 <h3>Delete: {{post.title}}</h3> <br>
@@ -11,4 +12,8 @@
         <button class="btn btn-danger">Delete Post</button>
     </form>
 </div>
+
+{% else %}
+<h1>You're nıt allowed here. And you know it...</h1>
+{% endif %}
 {% endblock %}

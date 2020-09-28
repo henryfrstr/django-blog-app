@@ -3,6 +3,7 @@ from django.urls import reverse
 from datetime import datetime, date
 
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 
 class Category(models.Model):
@@ -13,19 +14,20 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     def get_absolute_url(self):
-    # return reverse("post-detail", args=str(self.id))
+        # return reverse("post-detail", args=str(self.id))
         return reverse("home")
+
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
     title_tag = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    description = models.TextField()
+    description = RichTextField(blank=True, null=True)
     publication_date = models.DateField(auto_now_add=True)
     category = models.CharField(max_length=255, default="not categorized")
-
+    likes = models.ManyToManyField(User, related_name="blog_post")
 
     class Meta:
         ordering = ["-publication_date", "-id"]
