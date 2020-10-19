@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Category
+from .models import Post, Category, Comment
 
 choises = Category.objects.all().values_list('name', 'name')
 
@@ -17,14 +17,17 @@ class PostForm(forms.ModelForm):
             'title_tag',
             'author',
             'category',
-            'description'
+            'description',
+            'snippets',
+            'header_image',
         ]
         widgets = {
             'title': forms.TextInput(attrs={"class": "form-control", 'placeholder': 'Your Title'}),
             'title_tag': forms.TextInput(attrs={"class": "form-control", 'placeholder': 'Title Tag'}),
-            'author': forms.TextInput(attrs={"class": "form-control", 'value': '', 'id':'henry', 'type': 'hidden'}),
+            'author': forms.TextInput(attrs={"class": "form-control", 'value': '', 'id': 'henry', 'type': 'hidden'}),
             'category': forms.Select(choices=choise_list, attrs={"class": "form-control", 'placeholder': 'Category'}),
             'description': forms.Textarea(attrs={"class": "form-control", 'placeholder': 'Description'}),
+            'snippets': forms.Textarea(attrs={"class": "form-control"}),
         }
 
         # ordering = ["-id"]
@@ -43,3 +46,12 @@ class PostUpdateForm(forms.ModelForm):
             'title_tag': forms.TextInput(attrs={"class": "form-control", 'placeholder': 'Title Tag'}),
             'description': forms.Textarea(attrs={"class": "form-control", 'placeholder': 'Description'}),
         }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = [
+            "name",
+            "comment",
+        ]
